@@ -8,6 +8,8 @@ const port = 3000;
 
 app.use(express.static(path.resolve(__dirname, '../client/public')));
 
+
+
 //
 
 
