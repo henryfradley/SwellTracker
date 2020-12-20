@@ -19,7 +19,7 @@ class App extends React.Component {
       }
     }
     this.newLocation = this.newLocation.bind(this);
-    this.handleChange = this.handleChange.bind(this;
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -75,8 +75,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // let location = 'honolulu'
-    let location = this.state.location.name;
+    let location = 'honolulu'
+    // let location = this.state.location.name;
     const params = {
       access_key: key.positionStack,
       query: location
@@ -97,6 +97,7 @@ class App extends React.Component {
         this.setState({
           location: locationInfo
         })
+        .then(console.log('state?', this.state.location))
 
 
 

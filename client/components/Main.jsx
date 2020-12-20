@@ -1,14 +1,14 @@
 import React from 'react';
-import { RiSunCloudyFill, RiSunLine } from "react-icons/ri";
-import { loRainySharp } from "react-icons/io";
+import SpotInfo from './SpotInfo.jsx'
+
+
+
+
+
 
 let Main = function(props) {
 
-  let weatherIcons = function(cloudCover) {
-    if (cloudCover >= 0 && cloudCover <= 25) {return <RiSunLine size="50px"/>}
-    if (cloudCover > 25 && cloudCover <= 75) {return <RiSunCloudyFill size="50px"/>}
-    if (cloudCover > 75) {return <loRainySharp size="50px"/>}
-  }
+
   let forecast = function(cloudCover) {
     if (cloudCover >= 0 && cloudCover <= 25) {return 'Sunny'}
     if (cloudCover > 25 && cloudCover <= 75) {return 'Partly Cloudy'}
@@ -16,26 +16,22 @@ let Main = function(props) {
   }
 
 
-
+// let data = props.data;
 
 
   return (
-    <div style={styles.background}>
+    <div>
       <div style={styles.window}>
         <h1 style={styles.head}>SURF REPORT</h1>
-        <div style={styles.info}>HONOLULU, HI</div>
         <div style={styles.details}>Friday, December 18</div>
-        <div style={styles.info}>{weatherIcons(props.data.cloudCover)}</div>
+        {props.data ? <SpotInfo data={props.data} /> : null}
         <div style={styles.info}>
-        <div style={styles.details}>{props.data.airTemp}° {forecast(props.data.cloudCover)}</div>
-        <div style={styles.details}>Wind: {props.data.windSpeed}mph {props.data.windDirection}</div>
-        <div style={styles.details}>Primary Swell: {props.data.swellHeight}ft {props.data.swellPeriod}s {props.data.swellDirection}</div>
-        <div style={styles.details}>Secondary Swell: {props.data.scndSwellHt}ft {props.data.scndPeriod}s {props.data.scndDirection}</div>
-        <form style={styles.form} onSubmit={props.handleSubmit}>
-          <input onChange={props.handleChange} value={props.name} style={styles.input} required type="text" placeholder=""></input>
-          <input style={styles.search}type="submit" value="Change Location!"></input>
-        </form>
+          <form style={styles.form} onSubmit={props.handleSubmit}>
+            <input onChange={props.handleChange} value={props.name} style={styles.input} required type="text" placeholder=""></input>
+            <input style={styles.search}type="submit" value="Change Location!"></input>
+          </form>
         </div>
+
       </div>
     </div>
 
@@ -45,14 +41,13 @@ let Main = function(props) {
 }
 const styles = {
   window: {
+    boxShadow: '0 0 10px 4px #DCDCDC',
     backgroundColor: 'white',
     marginTop: '4%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    border: '2px solid black',
     width: '400px',
-    height: '600px',
-    'border-radius': '20px'
+    padding: '1%'
   },
   head: {
     color: 'black',
