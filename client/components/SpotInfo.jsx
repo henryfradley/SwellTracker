@@ -18,7 +18,7 @@ let SpotInfo = (props) => {
   return (
 
     <div>
-        <div style={styles.info}>HONOLULU, HI</div>
+        <div style={styles.info}>{props.location.name}</div>
         <div style={styles.info}>{weatherIcons(props.data.cloudCover)}</div>
         <div style={styles.details}>{props.data.airTemp}° {forecast(props.data.cloudCover)}</div>
         <div style={styles.details}>Wind: {props.data.windSpeed}mph {props.data.windDirection}</div>

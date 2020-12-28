@@ -9,11 +9,9 @@ import SpotInfo from './SpotInfo.jsx'
 let Main = function(props) {
 
 
-  let forecast = function(cloudCover) {
-    if (cloudCover >= 0 && cloudCover <= 25) {return 'Sunny'}
-    if (cloudCover > 25 && cloudCover <= 75) {return 'Partly Cloudy'}
-    if (cloudCover > 75) {return 'Rainy'}
-  }
+
+
+
 
 
 // let data = props.data;
@@ -24,10 +22,10 @@ let Main = function(props) {
       <div style={styles.window}>
         <h1 style={styles.head}>SURF REPORT</h1>
         <div style={styles.details}>Friday, December 18</div>
-        {props.data ? <SpotInfo data={props.data} /> : null}
+        {props.data ? <SpotInfo location={props.location} data={props.data} /> : null}
         <div style={styles.info}>
           <form style={styles.form} onSubmit={props.handleSubmit}>
-            <input onChange={props.handleChange} value={props.name} style={styles.input} required type="text" placeholder=""></input>
+            <input onChange={props.handleChange} style={styles.input} type="text" placeholder=""></input>
             <input style={styles.search}type="submit" value="Change Location!"></input>
           </form>
         </div>
