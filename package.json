@@ -26,7 +26,9 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-loader-spinner": "^3.1.14",
     "styled-components": "^5.2.1",
+    "url-loader": "^4.1.1",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
@@ -39,6 +41,7 @@
     "babel-loader": "^8.2.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "file-loader": "^6.2.0",
     "webpack": "^5.6.0"
   }
 }

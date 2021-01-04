@@ -1,44 +1,100 @@
-let celciusConverter = function(temp) {
-  let fahrenheit = (temp * 9/5) + 32;
+let celciusConverter = function (temp) {
+  let fahrenheit = (temp * 9 / 5) + 32;
   return Math.round(fahrenheit);
 };
 
-let meterConverter = function(height) {
+let meterConverter = function (height) {
   let feet = height / 0.3048;
-  return Math.round(feet);
+  feet = Math.round(feet * 100) / 100;
+  return feet;
 };
-let mpsConverter = function(speed) {
+
+
+let mpsConverter = function (speed) {
   let mph = speed * 2.237;
   return Math.round(mph);
 };
 
-let directionToEnglish = function(dir) {
-  let num = Math.floor((dir/ 22.5) + 0.5);
+let directionToEnglish = function (dir) {
+  let num = Math.floor((dir / 22.5) + 0.5);
   let directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   return directions[(num % 16)];
-}
-// let directionToEnglish = function(dir) {
-//   if (dir <= 11.25 || dir >= 348.75) { return 'N'; }
-//   if (dir > 11.25 && dir <= 33.75) {return 'NNE'; }
-//   if (dir > 33.75 && dir <= 56.25) {return 'NE'; }
-//   if (dir > 56.25 && dir <= 78.75) {return 'ENE'; }
-//   if (dir > 78.75 && dir <= 101.25) {return 'E'; }
-//   if (dir > 101.25 && dir <= 123.75) {return 'ESE'; }
-//   if (dir > 123.75 && dir <= 146.25) {return 'SSE'; }
-//   if (dir > 146.25 && dir <= 168.75) {return 'SE'; }
-//   if (dir > 168.75 && dir <= 191.25) {return 'S'; }
-//   if (dir > 191.25 && dir <= 213.75) {return 'SSW'; }
-//   if (dir > 213.75 && dir <= 236.25) {return 'SW'; }
-//   if (dir > 236.25 && dir <= 258.75) {return 'WSW'; }
-//   if (dir > 258.75 && dir <= 281.25) {return 'W'; }
-//   if (dir > 281.25 && dir <= 303.75) {return 'WNW'; }
-//   if (dir > 303.75 && dir <= 326.25) {return 'NW'; }
-//   if (dir > 326.25 && dir <= 348.75) {return 'NNW'; }
-// };
+};
+
+
+let timeConverter = function (time) {
+  time = time.split('T');
+  time = time[1];
+  time = time.slice(0, 5);
+
+  let firstHalf = time.slice(0, 2);
+
+  if (firstHalf === '00') {
+    firstHalf = '12';
+  }
+  let secondHalf = time.slice(3);
+  firstHalf = parseInt(firstHalf);
+  if (firstHalf < 12) {
+    return firstHalf.toString() + ':' + secondHalf + 'am';
+  }
+  if (firstHalf === 12) {
+    return firstHalf.toString() + ':' + secondHalf + 'pm';
+  } else {
+    return (firstHalf - 12).toString() + ':' + secondHalf + 'pm';
+  }
+
+};
+let closestTime = function (currentTime, times) {
+
+
+  let now = currentTime.toString().split(' ');
+  now = now[4];
+  now = now.slice(0, 5);
+  now = now.replace(':', '.');
+  now = parseFloat(now);
+
+  let tides = [];
+  for (var tide of times) {
+    tide = tide.time.split('T');
+    tide = tide[1];
+    tide = tide.slice(0, 5);
+    tide = tide.replace(':', '.');
+    tide = parseFloat(tide);
+    tides.push(tide);
+  }
+  let beforeSorted = tides;
+
+
+  let formattedTimes = tides;
+  formattedTimes.push(now);
+  formattedTimes = formattedTimes.sort((a, b) => a - b);
+
+  let nextIdx = formattedTimes.indexOf(now);
+  let next = formattedTimes[nextIdx];
+  next = beforeSorted.indexOf(next) - 1;
+  // return ('tides', tides);
+  return next;
+};
+
+let positions = function() {
+  let nums = [];
+  let position = 0;
+  for (let i = 0; i <= 25; i++) {
+    position += 28;
+    nums.push(position);
+  }
+  return nums;
+};
+
+
+
+
 
 module.exports = {
   celciusConverter,
   meterConverter,
   mpsConverter,
-  directionToEnglish
+  directionToEnglish,
+  timeConverter,
+  closestTime
 };

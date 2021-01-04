@@ -1,5 +1,8 @@
 import React from 'react';
-import SpotInfo from './SpotInfo.jsx'
+import SpotInfo from './SpotInfo.jsx';
+import WaveChart from './WaveChart.jsx';
+import Loader from 'react-loader-spinner';
+import { FaArrowUp } from "react-icons/fa";
 
 
 
@@ -10,28 +13,40 @@ let Main = function(props) {
 
 
 
+let today = new Date();
+today = today.toString();
+today = today.split(' ');
+let properFormat = `${today[0]}, ${today[1]} ${today[2]}, ${today[3]}`;
 
 
 
 
-// let data = props.data;
 
 
   return (
-    <div>
+
       <div style={styles.window}>
-        <h1 style={styles.head}>SURF REPORT</h1>
-        <div style={styles.details}>Friday, December 18</div>
-        {props.data ? <SpotInfo location={props.location} data={props.data} /> : null}
+        <div>
+          <img style={styles.logo} width="350px" src={props.logo}></img>
+        </div>
+
+        <div style={styles.details}>{properFormat}</div>
+        {props.dataLoaded.spotData ? <SpotInfo location={props.location} data={props.data} tides={props.tides} /> : <div style={styles.loader}><Loader type="ThreeDots" color="#80aaff" height={50} width={50}/></div> }
+
+
+        {props.dataLoaded.spotData ? <WaveChart waveData={props.waveData} /> : null}
+
         <div style={styles.info}>
           <form style={styles.form} onSubmit={props.handleSubmit}>
-            <input onChange={props.handleChange} style={styles.input} type="text" placeholder=""></input>
-            <input style={styles.search}type="submit" value="Change Location!"></input>
+            <input onChange={props.handleChange} style={styles.input} type="text" placeholder="new location..."></input>
+            <input style={styles.search}type="submit" value="Go"></input>
           </form>
         </div>
 
+
+
       </div>
-    </div>
+
 
 
   )
@@ -45,13 +60,15 @@ const styles = {
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '400px',
-    padding: '1%'
+    paddingTop: '4px',
+    paddingBottom: '4px'
   },
-  head: {
-    color: 'black',
-    'text-align': 'center',
-    'font-family': 'sans-serif',
-    padding: '0px'
+
+  logo: {
+    marginLeft: "25px",
+    marginRight: "25px",
+    marginTop: "18px",
+    marginBottom: "10px"
 
   },
   info: {
@@ -69,20 +86,37 @@ const styles = {
     'font-size': '16px'
   },
   form: {
-    display: 'inline-block'
+    marginBottom: '0px',
+    display: 'flex',
+    width: '60%',
+    marginLeft: '20%',
+    marginRight: '20%'
 
   },
   input: {
     width: '80%',
     height: '25px',
     outline: 'none',
-    border: '.5px solid black',
-    borderRadius: '5px',
-    textAlign: 'center'
+    border: 'none',
+    boxShadow: '0 0 5px 1px #DCDCDC',
+    textAlign: 'center',
+    marginTop: '20px'
   },
   search: {
+    marginLeft: '1px',
     marginTop: '20px',
-    width: '70%'
+    width: '20%',
+    'border-radius': '0px',
+    border: 'none',
+    boxShadow: '0 0 5px 1px #DCDCDC',
+    outline: 'none',
+    'background-color': '#80aaff',
+    cursor: 'pointer',
+    color: "white"
+  },
+  loader: {
+    marginLeft: '175px',
+    marginRight: '175px'
   }
 
 }
@@ -90,7 +124,3 @@ const styles = {
 export default Main;
 
 
-{/* <form onSubmit={console.log('submitted!')}>
-        <input required type="text" name="local"></input>
-        <input type="submit" value="search"></input>
-       </form> */}
