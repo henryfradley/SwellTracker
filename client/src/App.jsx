@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const axios = require('axios');
 import Main from '../components/Main.jsx';
-import './index.css'
 import converters from '../../helpers/converters.js';
 const key = require('../../dev_config.js')
 import Logo from '../public/SwellTracker.png'
@@ -18,7 +17,7 @@ class App extends React.Component {
       dataLoaded: {
         spotData: false
       },
-      newLocation: '',
+      newLocation: 'Waimea bay',
       location: {
         name: ''
       },
@@ -42,7 +41,12 @@ class App extends React.Component {
   }
 
   async newLocation(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
+
+
 
     this.setState({
       data: {},
@@ -132,7 +136,7 @@ class App extends React.Component {
       cloudCover: clouds
     }
 
-    //tidedata
+
     let tideData = thirdResponse.data;
     let todaysTides = [];
     for (let i = 0; i < 4; i++) {
@@ -165,6 +169,10 @@ class App extends React.Component {
 
 
 
+  }
+
+  componentDidMount() {
+    this.newLocation();
   }
 
 
