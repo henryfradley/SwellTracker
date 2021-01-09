@@ -1,0 +1,85 @@
+
+  .window {
+    box-shadow: 0 0 10px 4px #DCDCDC;
+    background-color: white;
+    margin-top: 4%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .logo {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+
+  }
+  .info {
+    padding-bottom: 20px;
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px
+  }
+  .details {
+    padding-bottom: 20px;
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 16px
+  }
+  .form {
+    margin-bottom: 0px;
+    display: flex;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%
+
+  }
+  .input {
+    width: 80%;
+    height: 25px;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 5px 1px #DCDCDC;
+    text-align: center;
+    margin-top: 20px
+  }
+  .search {
+    margin-left: 1px;
+    margin-top: 20px;
+    width: 20%;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 0 5px 1px #DCDCDC;
+    outline: none;
+    background-color: #80aaff;
+    color: white
+  }
+
+  .search:hover {
+    cursor: pointer;
+    background-color: #7399e6;
+  }
+  .loader {
+    margin-left: 175px;
+    margin-right: 175px
+  }
+
+  .error {
+    width: 320px;
+    font-family: sans-serif;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    text-align: center;
+    color: #80aaff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }

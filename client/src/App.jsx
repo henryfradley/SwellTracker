@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const axios = require('axios');
 import Main from '../components/Main.jsx';
+import Error from '../components/Error.jsx';
 import converters from '../../helpers/converters.js';
 const key = require('../../dev_config.js')
 import Logo from '../public/SwellTracker.png'
@@ -13,6 +14,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       data: {},
+      error: false,
       waveData: {},
       dataLoaded: {
         spotData: false
@@ -65,11 +67,21 @@ class App extends React.Component {
     }
     const firstResponse = await axios.get('http://api.positionstack.com/v1/forward', {params});
     let info = firstResponse.data.data[0];
+    console.log('info', info)
+    if (info === undefined) {
+      this.setState({
+        error: true
+      })
+    } else {
+
+
     let locationInfo = {
       name: info.name,
       lat: info.latitude,
       long: info.longitude
     };
+
+
 
     const [secondResponse, thirdResponse] = await Promise.all([
       axios.get(`https://api.stormglass.io/v2/weather/point?lat=${locationInfo.lat}&lng=${locationInfo.long}&params=windSpeed,windDirection,airTemperature,swellDirection,swellHeight,swellPeriod,secondarySwellPeriod,secondarySwellDirection,secondarySwellHeight,cloudCover`, {
@@ -83,27 +95,31 @@ class App extends React.Component {
         }
       })
     ])
+    .catch((error) => {
+      this.setState({
+        error: true
+      })
+    })
+
+
 
 
     let swellDataForDay = [];
-    for (let i = 0; i <= 25; i++) {
+    for (let i = 0; i <= 27; i++) {
       swellDataForDay.push(secondResponse.data.hours[i])
     }
     let waveHeights = [];
     let secondaryWaveHeights = [];
 
-    for (let j = 0; j <= 25; j++) {
+    for (let j = 0; j <= 27; j+=3) {
       let height = parseFloat(swellDataForDay[j].swellHeight.noaa);
       height = converters.meterConverter(height);
-      height = height * 25;
-      let chartPosition = 300 - height;
+
       let secondaryHeight = parseFloat(swellDataForDay[j].secondarySwellHeight.noaa);
       secondaryHeight = converters.meterConverter(secondaryHeight);
-      secondaryHeight = secondaryHeight * 25;
-      let secondChartPosition = 300 - secondaryHeight;
 
-      waveHeights.push(chartPosition);
-      secondaryWaveHeights.push(secondChartPosition);
+      waveHeights.push(height);
+      secondaryWaveHeights.push(secondaryHeight);
     }
 
     let todaysWaveData = {
@@ -144,9 +160,9 @@ class App extends React.Component {
     }
     let now = new Date();
 
-    let closestTide = converters.closestTime(now, todaysTides)
+    // let closestTide = converters.closestTime(now, todaysTides)
 
-    let nextTide = todaysTides[closestTide];
+    let nextTide = todaysTides[3];
     let ht = converters.meterConverter(nextTide.height);
     let nextTime = converters.timeConverter(nextTide.time);
     let hiOrLow = nextTide.type;
@@ -168,7 +184,7 @@ class App extends React.Component {
     todaysWaveData = {};
 
 
-
+    }
   }
 
   componentDidMount() {
@@ -186,7 +202,8 @@ class App extends React.Component {
 
     return (
       <div>
-      <Main logo={Logo} name={this.state.location.name} location={this.state.location} data={this.state.data} waveData={this.state.waveData} handleChange={this.handleChange} handleSubmit={this.newLocation} tides={this.state.tides} dataLoaded={this.state.dataLoaded} />
+        {!this.state.error ? <Main logo={Logo} name={this.state.location.name} location={this.state.location} data={this.state.data} waveData={this.state.waveData} handleChange={this.handleChange} handleSubmit={this.newLocation} tides={this.state.tides} dataLoaded={this.state.dataLoaded} /> : <Error logo={Logo} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>}
+
       </div>
     );
   }

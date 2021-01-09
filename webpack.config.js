@@ -9,6 +9,19 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.css$/i,
+      exclude: /node_modules/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+          },
+        },
+      ],
+    },
+    {
       test: /\.jsx?$/,
       include: path.resolve(__dirname, './client'),
       exclude: /node_modules/,
@@ -26,7 +39,7 @@ module.exports = {
       options: {
         name: path.resolve(__dirname, './client'),
       },
-    },]
+    }]
   }
 };
 
