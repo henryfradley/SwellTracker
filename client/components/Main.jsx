@@ -2,7 +2,6 @@ import React from 'react';
 import SpotInfo from './SpotInfo.jsx';
 import WaveChart from './WaveChart.jsx';
 import Loader from 'react-loader-spinner';
-// import Error from './Error.jsx';
 import { FaArrowUp } from "react-icons/fa";
 import main from '../src/main.module.css'
 
