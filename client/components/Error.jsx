@@ -1,5 +1,5 @@
 import React from 'react';
-import main from '../src/main.module.css';
+import main from '../src/main.module.scss';
 
 
 const Error = (props) => {

@@ -1,6 +1,10 @@
+$shadow: #DCDCDC;
+$button: #80aaff;
+$buttonHover: #7399e6;
+
 
   .window {
-    box-shadow: 0 0 10px 4px #DCDCDC;
+    box-shadow: 0 0 10px 4px $shadow;
     background-color: white;
     margin-top: 4%;
     margin-left: auto;
@@ -44,7 +48,7 @@
     height: 25px;
     outline: none;
     border: none;
-    box-shadow: 0 0 5px 1px #DCDCDC;
+    box-shadow: 0 0 5px 1px $shadow;
     text-align: center;
     margin-top: 20px
   }
@@ -54,16 +58,17 @@
     width: 20%;
     border-radius: 0px;
     border: none;
-    box-shadow: 0 0 5px 1px #DCDCDC;
+    box-shadow: 0 0 5px 1px $shadow;
     outline: none;
-    background-color: #80aaff;
-    color: white
+    background-color: $button;
+    color: white;
+    &:hover {
+      cursor: pointer;
+      background-color: $buttonHover;
+    }
   }
 
-  .search:hover {
-    cursor: pointer;
-    background-color: #7399e6;
-  }
+
   .loader {
     margin-left: 175px;
     margin-right: 175px

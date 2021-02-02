@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 const axios = require('axios');
-import Main from '../components/Main.jsx';
+import Main from '../components/Main.tsx';
 import Error from '../components/Error.jsx';
 import converters from '../../helpers/converters.js';
 const key = require('../../dev_config.js')
@@ -46,9 +46,6 @@ class App extends React.Component {
     if (event) {
       event.preventDefault();
     }
-
-
-
 
     this.setState({
       data: {},

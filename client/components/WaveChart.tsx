@@ -1,8 +1,8 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
-import wave from '../src/wave.module.css'
+import wave from '../src/wave.module.scss'
 
-const WaveChart = function (props) {
+const WaveChart = function (props: any) {
   const primaryData = props.waveData.primary;
   const secondaryData = props.waveData.secondary;
 
@@ -40,7 +40,7 @@ const WaveChart = function (props) {
       }],
       yAxes: [{
         ticks: {
-          callback: function(value, index, values) {
+          callback: function(value: number, index: number, values: any) {
             return  value + 'ft';
 
           }

@@ -1,3 +1,8 @@
+$primary: #004de6;
+$secondary: #ff9900;
+
+
+
 .info {
   color: black;
   text-align: center;
@@ -20,14 +25,14 @@
 }
 .secondaryDetails {
   padding-bottom: 10px;
-  color: #ff9900;
+  color: $secondary;
   text-align: center;
   font-family: sans-serif;
   font-size: 11px
 }
 .primaryDetails {
   padding-bottom: 10px;
-  color: #004de6;
+  color: $primary;
   text-align: center;
   font-family: sans-serif;
   font-size: 11px
