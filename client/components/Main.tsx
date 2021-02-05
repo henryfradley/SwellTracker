@@ -19,13 +19,7 @@ let todayString = today.toString();
 let todayArray = todayString.split(' ');
 let properFormat = `${todayArray[0]}, ${todayArray[1]} ${todayArray[2]}, ${todayArray[3]}`;
 
-
-
-
-
-
   return (
-
       <div className={main.window}>
         <div>
           <img className={main.logo} width="350px" src={props.logo} alt="swelltracker"></img>
@@ -37,11 +31,7 @@ let properFormat = `${todayArray[0]}, ${todayArray[1]} ${todayArray[2]}, ${today
         {props.dataLoaded.spotData ? <SpotInfo location={props.location} data={props.data} tides={props.tides} /> : null}
 
 
-
-
         {props.dataLoaded.spotData ? <WaveChart waveData={props.waveData} /> : null}
-
-
 
 
         <div className={main.info}>

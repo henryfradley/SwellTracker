@@ -2,15 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const axios = require('axios');
 import Main from '../components/Main.tsx';
-import Error from '../components/Error.jsx';
-import converters from '../../helpers/converters.js';
+// import Error from '../components/Error.jsx';
+const converters = require('../../helpers/converters.ts');
 const key = require('../../dev_config.js')
-import Logo from '../public/SwellTracker.png'
+// import * as Logo from '../public/SwellTracker.png'
+import Nav from '../components/Nav.tsx';
+
+interface State {
+  data: object,
+  error: boolean,
+  waveData: object,
+  dataLoaded: object,
+  newLocation: string,
+  location: object,
+  tides: object
+}
 
 
-
-class App extends React.Component {
-  constructor(props) {
+class App extends React.Component <State> {
+  constructor(props: any) {
     super(props)
     this.state = {
       data: {},
@@ -34,7 +44,7 @@ class App extends React.Component {
 
   }
 
-  handleChange(event) {
+  handleChange(event: any) {
     event.preventDefault();
     let location = event.target.value;
     this.setState({
@@ -42,7 +52,7 @@ class App extends React.Component {
     })
   }
 
-  async newLocation(event) {
+  async newLocation(event: any) {
     if (event) {
       event.preventDefault();
     }
@@ -178,15 +188,18 @@ class App extends React.Component {
       newLocation: ''
     })
 
-    todaysWaveData = {};
+    todaysWaveData = {
+      primary: [],
+      secondary: []
+    };
 
 
     }
   }
 
-  componentDidMount() {
-    this.newLocation();
-  }
+  // componentDidMount() {
+  //   this.newLocation();
+  // }
 
 
 
@@ -199,7 +212,8 @@ class App extends React.Component {
 
     return (
       <div>
-        {!this.state.error ? <Main logo={Logo} name={this.state.location.name} location={this.state.location} data={this.state.data} waveData={this.state.waveData} handleChange={this.handleChange} handleSubmit={this.newLocation} tides={this.state.tides} dataLoaded={this.state.dataLoaded} /> : <Error logo={Logo} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>}
+        {/* {!this.state.error ? <Main logo={Logo} name={this.state.location.name} location={this.state.location} data={this.state.data} waveData={this.state.waveData} handleChange={this.handleChange} handleSubmit={this.newLocation} tides={this.state.tides} dataLoaded={this.state.dataLoaded} /> : <Error logo={Logo} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>} */}
+        <Nav />
 
       </div>
     );
